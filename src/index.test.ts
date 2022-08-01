@@ -62,8 +62,8 @@ describe('ServiceService', () => {
     })
 
     test('var-config', () => {
-        const ServiceService = new ServiceContainer()
-        ServiceService.configure('some-key', 'some-value')
-        expect(ServiceService.config('some-key')).toBe('some-value')
+        const ServiceService = new ServiceContainer<{ name: string }>()
+        ServiceService.configure('name', 'some-value')
+        expect(ServiceService.config('name')).toBe('some-value')
     })
 })

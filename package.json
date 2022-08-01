@@ -1,9 +1,18 @@
 {
     "name": "service-service",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Dead simple container for service definition and lazy initialization.",
     "homepage": "https://bemit.codes",
-    "author": "Michael Becker <michael@bemit.codes>",
+    "author": {
+        "name": "bemit",
+        "url": "https://bemit.codes"
+    },
+    "contributors": [
+        {
+            "name": "Michael Becker",
+            "url": "https://i-am-digital.eu"
+        }
+    ],
     "license": "MIT",
     "keywords": [
         "service-container",
@@ -12,6 +21,10 @@
     ],
     "type": "module",
     "module": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/bemit/service-service.git"
+    },
     "scripts": {
         "prebuild": "npm run clean-dist && npm run test",
         "build": "cross-env NODE_ENV=production CI=true npm run build-babel",
