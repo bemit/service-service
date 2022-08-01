@@ -54,7 +54,7 @@ const config: Config.InitialOptions = {
             ],
         },
     ],
-    coverageDirectory: '<rootDir>/../coverage',
+    coverageDirectory: '<rootDir>/coverage',
 }
 
 export default config
