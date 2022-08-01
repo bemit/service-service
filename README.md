@@ -1,5 +1,6 @@
 # ServiceService
 
+[![npm (scoped)](https://img.shields.io/npm/v/service-service?style=flat-square)](https://www.npmjs.com/package/service-service)
 [![Github actions Build](https://github.com/bemit/service-service/actions/workflows/blank.yml/badge.svg)](https://github.com/bemit/service-service/actions)
 [![MIT license](https://img.shields.io/npm/l/service-service?style=flat-square)](https://github.com/bemit/service-service/blob/main/LICENSE)
 [![Coverage Status](https://img.shields.io/codecov/c/github/bemit/service-service/main.svg?style=flat-square)](https://codecov.io/gh/bemit/service-service/branch/main)
@@ -42,7 +43,7 @@ container.define(ExampleService, [
 ])
 
 // provide params as function, for lazy execution (on first `use`)
-container.define(ExampleService, [
+container.define(ExampleService, () => [
     'the-name',
     {
         a: 'a-value',
