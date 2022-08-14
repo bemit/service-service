@@ -1,7 +1,7 @@
 {
     "name": "service-service",
-    "version": "0.1.1",
-    "description": "Dead simple container for service definition and lazy initialization.",
+    "version": "0.1.2",
+    "description": "Dead simple container for service and config definition, with lazy initialization.",
     "homepage": "https://bemit.codes",
     "author": {
         "name": "bemit",
@@ -20,7 +20,9 @@
         "dependency"
     ],
     "type": "module",
-    "module": "index.js",
+    "exports": {
+        ".": "./index.js"
+    },
     "repository": {
         "type": "git",
         "url": "https://github.com/bemit/service-service.git"
