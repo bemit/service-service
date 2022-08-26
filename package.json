@@ -1,6 +1,6 @@
 {
     "name": "service-service",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "description": "Dead simple container for service and config definition, with lazy initialization.",
     "homepage": "https://bemit.codes",
     "author": {
