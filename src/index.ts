@@ -5,7 +5,7 @@ export type ServiceDefinition<CC extends (new (...args: any[]) => any) = (new (.
 
 export class ServiceContainer<C extends {} = { [k: string]: any }> {
     protected readonly configData: C = {} as C
-    protected services: { [key: string]: ServiceDefinition<any> } = {}
+    protected services: { [key: string]: true | ServiceDefinition<any> } = {}
     protected loadedServices: { [key: string]: InstanceType<any> } = {}
 
     configure<K extends keyof C = keyof C>(key: K, value: C[K]) {
@@ -14,6 +14,15 @@ export class ServiceContainer<C extends {} = { [k: string]: any }> {
 
     config<K extends keyof C = keyof C>(key: K): C[K] {
         return this.configData[key]
+    }
+
+    provide<C extends (new (...args: any[]) => any)>(
+        classRefOrName: string | C,
+        instance: InstanceType<C>,
+    ) {
+        const name = typeof classRefOrName === 'string' ? classRefOrName : classRefOrName.name
+        this.loadedServices[name] = instance
+        this.services[name] = true
     }
 
     add<C extends (new (...args: any[]) => any), SD extends ServiceDefinition<C> = ServiceDefinition<C>>(
@@ -44,14 +53,16 @@ export class ServiceContainer<C extends {} = { [k: string]: any }> {
     }
 
     private getService<A>(name: string): A {
-        if(!this.services[name]) {
-            throw new Error('ServiceContainer not found: ' + name)
+        const ld = this.loadedServices[name]
+        const def = this.services[name]
+        if(!def) {
+            throw new Error('ServiceContainer not found service: ' + name)
         }
-        if(!this.loadedServices[name]) {
-            const serviceDef = this.services[name]()
+        if(!ld) {
+            const serviceDef = (def as ServiceDefinition<any>)()
             const service = serviceDef.service
             const initParams = typeof serviceDef.init === 'function' ? serviceDef.init() : serviceDef.init
-            this.loadedServices[name] = new service(...(initParams || []))
+            this.loadedServices[name] = new service(...initParams)
         }
         return this.loadedServices[name]
     }
